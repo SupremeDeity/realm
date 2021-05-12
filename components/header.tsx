@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import AccDropdown from "./header-AccDD";
 import GlobalUserContext from "../components/GlobalUserContext";
-import { Navbar } from "react-bootstrap";
+import { DatePicker } from "antd";
 
 const Header = (props) => {
   let router = useRouter();
@@ -32,19 +32,22 @@ const Header = (props) => {
 
   return (
     <>
-      <Navbar bg="dark" className="navbar navbar-expand-sm navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
             <Image
               src="/favicon.ico"
               width="24px"
               height="24px"
-              className="img-thumbnail"
+              className="img-thumbnail d-inline-block align-text-top"
             ></Image>
-            <label className="ms-1">Realm</label>
+            Realm
           </a>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ms-auto">
+          <div
+            className="collapse navbar-collapse flex-row-reverse"
+            id="navbarSupportedContent"
+          >
+            <ul className="navbar-nav">
               <li className="nav-item me-2">
                 <a
                   className="nav-link active fw-bold"
@@ -73,7 +76,7 @@ const Header = (props) => {
           </div>
           {AccStatus()}
         </div>
-      </Navbar>
+      </nav>
     </>
   );
 };
