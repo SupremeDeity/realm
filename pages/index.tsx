@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Header from "../components/header";
-import { useState } from "react";
 
 export default function Home() {
   return (

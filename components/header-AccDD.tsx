@@ -1,55 +1,89 @@
 // Header component - Account dropdown
 import * as React from "react";
-import Image from "next/image";
-import GlobalUserContext from "../components/GlobalUserContext";
-import { Menu, Dropdown } from "antd";
+// import GlobalUserContext, {
+//   DefaultUser,
+// } from "../components/GlobalUserContext";
+import { Menu, Dropdown, Typography, Avatar } from "antd";
+import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import firebase from "firebase/app";
+import { useRouter } from "next/router";
+
+const { Text } = Typography;
 
 const AccDropdown = (props) => {
-  const { user, setUser } = React.useContext(GlobalUserContext);
+  // const { user, setUser } = React.useContext(GlobalUserContext);
+  const router = useRouter();
+
+  const logoutHandler = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        // setUser(DefaultUser);
+        router.push("/login");
+      });
+  };
+
+  const GetAvatar = () => {
+    console.log(props.user.photoURL);
+    if (props.user.photoURL) {
+      return <Avatar src={props.user.photoURL} size={30}></Avatar>;
+    } else {
+      if (props.user.displayName) {
+        return (
+          <Avatar
+            size={30}
+            style={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+          >
+            {props.user.displayName.charAt(0).toUpperCase()}
+          </Avatar>
+        );
+      } else {
+        return (
+          <Avatar
+            size={30}
+            style={{ backgroundColor: "#87d068" }}
+            icon={
+              <UserOutlined style={{ margin: "auto", fontSize: "1.2rem" }} />
+            }
+          />
+        );
+      }
+    }
+  };
+
+  const menu = (
+    <Menu style={{ minWidth: 100 }}>
+      <Menu.Item className="d-block">
+        {GetAvatar()}
+        <Text
+          style={{ width: 100 }}
+          ellipsis={true}
+          className="mx-1"
+          strong={true}
+        >
+          {props.user.displayName}
+        </Text>
+      </Menu.Item>
+      <hr></hr>
+      <Menu.Item>
+        <a rel="noopener noreferrer" href="#">
+          Settings
+        </a>
+      </Menu.Item>
+      <Menu.Item danger onClick={logoutHandler}>
+        Log Out
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
-    <div className="dropdown me-3 dropstart">
-      <a
-        className="dropdown-toggle"
-        id="dropdownAccMenu"
-        data-bs-toggle="dropdown"
-        data-bs-display="static"
-        aria-expanded="false"
-      >
-        <img
-          src={user.photoURL}
-          width="24px"
-          height="24px"
-          className="img-thumbnail"
-        ></img>
+    <Dropdown overlay={menu}>
+      <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+        {GetAvatar()}
+        <DownOutlined className="mx-1" />
       </a>
-      <ul
-        className="dropdown-menu dropdown-menu-end dropdown-menu-lg-start dropdown-menu-dark"
-        aria-labelledby="dropdownAccMenu"
-      >
-        <li className="container-fluid mx-auto">
-          <span className="d-block text-center">
-            <img
-              src={user.photoURL}
-              width="24px"
-              height="24px"
-              className="img-thumbnail d-block"
-            ></img>
-          </span>
-          <label className="d-block text-break text-center mx-2">Mohsih</label>
-        </li>
-        <hr></hr>
-        <li>
-          <a className="dropdown-item" href="#">
-            Settings
-          </a>
-        </li>
-        <li>
-          <a className="dropdown-item" href="#">
-            Log out
-          </a>
-        </li>
-      </ul>
-    </div>
+    </Dropdown>
   );
 };
 

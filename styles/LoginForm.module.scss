@@ -1,0 +1,30 @@
+.login_container {
+    max-width: 40%;
+}
+
+.login_form_forgot {
+    float: right;
+}
+
+.divider {
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter !important;
+}
+
+.providerIcon {
+    font-size: 1.5rem;
+    color: var(--bs-light);
+}
+
+.providerBtn {
+    display: block;
+    width: auto;
+    height: auto;
+    margin: auto;
+   
+}
+
+.form_login_button {
+    margin: auto;
+    display: block;
+}

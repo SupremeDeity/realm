@@ -7,10 +7,10 @@ export interface User {
   photoURL: string;
 }
 
-export interface UserStateInterface {
-  user: User;
-  setUser: React.Dispatch<React.SetStateAction<User>>;
-}
+// export interface UserStateInterface {
+//   user: User;
+//   setUser: React.Dispatch<React.SetStateAction<User>>;
+// }
 
 export const DefaultUser: User = {
   email: "",
@@ -19,12 +19,12 @@ export const DefaultUser: User = {
   photoURL: "",
 };
 
-export const DefaultUserState: UserStateInterface = {
-  user: { email: "", displayName: "", id: "", photoURL: "" },
-  setUser: () => {},
-};
+// export const DefaultUserState: UserStateInterface = {
+//   user: { email: "", displayName: "", id: "", photoURL: "" },
+//   setUser: () => {},
+// };
 
-const GlobalUserContext = React.createContext(DefaultUserState);
-export const ContextProvider = GlobalUserContext.Provider;
+// const GlobalUserContext = React.createContext(DefaultUserState);
+// export const ContextProvider = GlobalUserContext.Provider;
 
-export default GlobalUserContext;
+// export default GlobalUserContext;
