@@ -2,12 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import firebase from "firebase/app";
 import initializeFirebase from "./services/firebase";
 import { useRouter } from "next/router";
-//import GlobalUserContext, { User } from "../components/GlobalUserContext";
 import LoginForm from "../components/LoginForm";
 
 const Login = (props) => {
   const router = useRouter();
-  //const { user, setUser } = useContext(GlobalUserContext);
 
   const [isLogging, setIsLogging] = useState(false);
   const [isChecking, setIsChecking] = useState(true);
@@ -34,6 +32,7 @@ const Login = (props) => {
     initializeFirebase();
     // Get provider
     const provider = new firebase.auth.GoogleAuthProvider();
+
     setIsLogging(true);
     provider.addScope("https://www.googleapis.com/auth/userinfo.email");
     provider.addScope("https://www.googleapis.com/auth/userinfo.profile");
@@ -51,15 +50,6 @@ const Login = (props) => {
             if (!user) {
               throw new Error("There was an error authorizing");
             }
-
-            // // Create User State from found data.
-            // const userState: User = {
-            //   email: user.email,
-            //   displayName: user.displayName,
-            //   id: user.uid,
-            //   photoURL: user.photoURL,
-            // };
-            // setUser(userState);
 
             setIsLogging(false);
             return;
@@ -99,18 +89,6 @@ const Login = (props) => {
             if (!user) {
               throw new Error("There was an error authorizing");
             }
-
-            // Create User State from found data.
-            // displayName and photoURL are null as these are not stored in session
-            // and will be overidden when we get to the header component
-            // let userState: User = {
-            //   email: user.email,
-            //   displayName: null,
-            //   id: user.uid,
-            //   photoURL: null,
-            // };
-
-            // setUser(userState);
 
             setIsLogging(false);
             setMessage("");

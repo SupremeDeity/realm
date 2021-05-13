@@ -1,8 +1,6 @@
 // Header component - Account dropdown
 import * as React from "react";
-// import GlobalUserContext, {
-//   DefaultUser,
-// } from "../components/GlobalUserContext";
+
 import { Menu, Dropdown, Typography, Avatar } from "antd";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import firebase from "firebase/app";
@@ -11,7 +9,6 @@ import { useRouter } from "next/router";
 const { Text } = Typography;
 
 const AccDropdown = (props) => {
-  // const { user, setUser } = React.useContext(GlobalUserContext);
   const router = useRouter();
 
   const logoutHandler = () => {
@@ -19,13 +16,11 @@ const AccDropdown = (props) => {
       .auth()
       .signOut()
       .then(() => {
-        // setUser(DefaultUser);
         router.push("/login");
       });
   };
 
   const GetAvatar = () => {
-    console.log(props.user.photoURL);
     if (props.user.photoURL) {
       return <Avatar src={props.user.photoURL} size={30}></Avatar>;
     } else {
