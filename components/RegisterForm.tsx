@@ -1,5 +1,5 @@
-import { Divider, Form, Input, Checkbox, Button, Typography } from "antd";
-import { UserOutlined, LockOutlined, GoogleOutlined } from "@ant-design/icons";
+import { Divider, Form, Input, Button, Typography } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import * as React from "react";
 import styles from "../styles/RegisterForm.module.scss";
 import PasswordComponent from "./PasswordComponent";

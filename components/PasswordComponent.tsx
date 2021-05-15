@@ -6,7 +6,6 @@ import { LockOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 
 const PasswordComponent = () => {
-  const [message, setMessage] = useState("Please input a password!");
   const [percentage, setPercentage] = useState(0);
 
   const validatePassword = (event) => {
@@ -57,7 +56,7 @@ const PasswordComponent = () => {
         rules={[
           {
             required: true,
-            message: message,
+            message: "Please input a password!",
             min: 6,
             pattern: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{6,32}$/,
           },

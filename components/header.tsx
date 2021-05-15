@@ -12,7 +12,7 @@ const Header = () => {
   let [user, setUser] = useState(DefaultUser);
 
   const checkLoginSession = () => {
-    initializeFirebase();
+    //initializeFirebase();
 
     firebase.auth().onAuthStateChanged((currentUser: firebase.User) => {
       if (!currentUser) {

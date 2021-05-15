@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import firebase from "firebase/app";
-import initializeFirebase from "./services/firebase";
 import { useRouter } from "next/router";
 import LoginForm from "../components/LoginForm";
 import { message as Message } from "antd";
@@ -13,7 +12,7 @@ const Login = () => {
   const [message, setMessage] = useState("");
 
   const checkLoginSession = () => {
-    initializeFirebase();
+    //initializeFirebase();
 
     firebase.auth().onAuthStateChanged((currentUser: firebase.User) => {
       if (currentUser) {
@@ -31,7 +30,7 @@ const Login = () => {
 
   const doProviderAuth = async (_) => {
     // Initialize Firebase
-    initializeFirebase();
+    //initializeFirebase();
     // Get provider
     const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -71,7 +70,7 @@ const Login = () => {
 
   const doEmailPassAuth = (props) => {
     // Initialize Firebase
-    initializeFirebase();
+    //initializeFirebase();
     // Get provider
     const provider = new firebase.auth.EmailAuthProvider();
 
