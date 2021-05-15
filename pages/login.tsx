@@ -3,8 +3,9 @@ import firebase from "firebase/app";
 import initializeFirebase from "./services/firebase";
 import { useRouter } from "next/router";
 import LoginForm from "../components/LoginForm";
+import { message as Message } from "antd";
 
-const Login = (props) => {
+const Login = () => {
   const router = useRouter();
 
   const [isLogging, setIsLogging] = useState(false);
@@ -23,6 +24,7 @@ const Login = (props) => {
     });
   };
 
+  // Confirms that the user isnt signed in
   useEffect(() => {
     checkLoginSession();
   }, []);
@@ -52,6 +54,9 @@ const Login = (props) => {
             }
 
             setIsLogging(false);
+
+            Message.success("Logged in successfully.");
+
             return;
 
             //router.push("../");
@@ -81,6 +86,7 @@ const Login = (props) => {
           : firebase.auth.Auth.Persistence.SESSION
       )
       .then(() => {
+        Message.info({ content: "Logging in....", key: "logInfo" });
         firebase
           .auth()
           .signInWithEmailAndPassword(props.email, props.password)
@@ -89,6 +95,11 @@ const Login = (props) => {
             if (!user) {
               throw new Error("There was an error authorizing");
             }
+
+            Message.success({
+              content: "Logged in successfully",
+              key: "logInfo",
+            });
 
             setIsLogging(false);
             setMessage("");

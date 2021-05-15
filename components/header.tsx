@@ -6,7 +6,7 @@ import { DefaultUser } from "../components/GlobalUserContext";
 import firebase from "firebase/app";
 import initializeFirebase from "../pages/services/firebase";
 
-const Header = (props) => {
+const Header = () => {
   let [isLoggedIn, setIsLoggedIn] = useState(false);
   let router = useRouter();
   let [user, setUser] = useState(DefaultUser);
@@ -30,6 +30,7 @@ const Header = (props) => {
           photoURL: currentUser.photoURL,
         });
         setIsLoggedIn(true);
+
         return;
       }
     });
@@ -41,8 +42,11 @@ const Header = (props) => {
   }, []);
 
   let handleLogin = (event) => {
-    event.preventDefault();
     router.push("/login");
+  };
+
+  let handleRegister = (event) => {
+    router.push("/register");
   };
 
   const AccStatus = () => {
@@ -53,6 +57,12 @@ const Header = (props) => {
         <div>
           <button className="btn btn-outline-primary" onClick={handleLogin}>
             Login
+          </button>
+          <button
+            className="btn btn-outline-primary ms-1"
+            onClick={handleRegister}
+          >
+            Register
           </button>
         </div>
       );

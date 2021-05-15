@@ -58,6 +58,7 @@ const LoginForm = (props: ILoginFormProps) => {
             type="primary"
             htmlType="submit"
             className={styles.form_login_button}
+            loading={props.isLoggingIn}
           >
             Log in
           </Button>

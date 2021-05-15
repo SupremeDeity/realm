@@ -10,6 +10,7 @@
   "dependencies": {
     "@popperjs/core": "^2.9.1",
     "antd": "^4.15.5",
+    "antd-password-input-strength": "^1.1.1",
     "bootstrap": "^5.0.0-beta3",
     "firebase": "^8.5.0",
     "jquery": "1.9.1",
