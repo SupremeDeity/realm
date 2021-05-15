@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import AccDropdown from "./header-AccDD";
 import { DefaultUser } from "../components/GlobalUserContext";
 import firebase from "firebase/app";
-import initializeFirebase from "../pages/services/firebase";
+import initializeFirebase from "../services/firebase";
 
 const Header = () => {
   let [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -12,7 +12,7 @@ const Header = () => {
   let [user, setUser] = useState(DefaultUser);
 
   const checkLoginSession = () => {
-    //initializeFirebase();
+    initializeFirebase();
 
     firebase.auth().onAuthStateChanged((currentUser: firebase.User) => {
       if (!currentUser) {

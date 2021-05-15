@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import firebase from "firebase/app";
 import { message as Message } from "antd";
+import initializeFirebase from "../services/firebase";
 
 const Register = () => {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -11,7 +12,7 @@ const Register = () => {
   const router = useRouter();
 
   const checkLoginSession = () => {
-    //InitializeFirebase();
+    initializeFirebase();
 
     firebase.auth().onAuthStateChanged((currentUser: firebase.User) => {
       if (currentUser) {
@@ -30,7 +31,7 @@ const Register = () => {
   const emailPassCallback = (props) => {
     setIsRegistering(true);
     Message.info({ content: "Registering...", key: "registerMessage" });
-    // InitializeFirebase();
+    initializeFirebase();
 
     // Registers + Logs the user in
     firebase
