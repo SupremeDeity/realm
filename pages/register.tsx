@@ -42,19 +42,25 @@ const Register = () => {
         setMessage("");
         setIsRegistering(false);
 
-        Message.success({
-          content: "Registeration Successful!",
-          key: "registerMessage",
-        });
+        Message.success(
+          {
+            content: "Registeration Successful!",
+            key: "registerMessage",
+          },
+          3
+        );
         router.push("../");
       })
       .catch((error) => {
         setIsRegistering(false);
 
-        Message.error({
-          content: "Registeration Failed!",
-          key: "registerMessage",
-        });
+        Message.error(
+          {
+            content: "Registeration Failed!",
+            key: "registerMessage",
+          },
+          3
+        );
 
         if (error.code == "auth/email-already-in-use") {
           setMessage("Email already exists!");

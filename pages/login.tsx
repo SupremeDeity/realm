@@ -56,7 +56,7 @@ const Login = () => {
 
             setIsLogging(false);
 
-            Message.success("Logged in successfully.");
+            Message.success("Logged in successfully.", 3);
 
             return;
 

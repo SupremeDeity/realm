@@ -68,8 +68,8 @@ const test = () => {
       .auth()
       .confirmPasswordReset(oobCode.toString(), password)
       .then(() => {
-        Message.success("Password Reset Successful.");
-        Message.info("You can now login with your new password.");
+        Message.success("Password Reset Successful.", 3);
+        Message.info("You can now login with your new password.", 3);
         router.push("../login");
       })
       .catch(() => {
