@@ -49,7 +49,7 @@ const LoginForm = (props: ILoginFormProps) => {
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
-          <a className={styles.login_form_forgot} href="">
+          <a className={styles.login_form_forgot} href="../forgotpassword">
             Forgot password
           </a>
         </Form.Item>
