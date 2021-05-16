@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import firebase from "firebase/app";
 import { useRouter } from "next/router";
 import LoginForm from "../components/LoginForm";
-import { message as Message } from "antd";
+import { message as Message, Spin } from "antd";
 import initializeFirebase from "../services/firebase";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const Login = () => {
   const router = useRouter();
@@ -73,10 +74,9 @@ const Login = () => {
     // Initialize Firebase
     initializeFirebase();
     // Get provider
-    const provider = new firebase.auth.EmailAuthProvider();
+    //const provider = new firebase.auth.EmailAuthProvider();
 
     setIsLogging(true);
-    console.log(props.remember);
 
     firebase
       .auth()
@@ -133,7 +133,9 @@ const Login = () => {
       />
     </div>
   ) : (
-    <> </>
+    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+      <Spin indicator={<LoadingOutlined />} size="large" />
+    </div>
   );
 };
 

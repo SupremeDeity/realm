@@ -1,3 +1,5 @@
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 import firebase from "firebase/app";
 import { useRouter } from "next/router";
 import * as React from "react";
@@ -30,6 +32,8 @@ const ForgotPassword = (props) => {
   }, []);
 
   const submitCallback = (event) => {
+    setIsSending(true);
+    initializeFirebase();
     firebase
       .auth()
       .fetchSignInMethodsForEmail(event.email)
@@ -42,17 +46,20 @@ const ForgotPassword = (props) => {
               setMessage(
                 "You should recieve a reset password email if the provided email exists."
               );
+              setIsSending(false);
             })
             .catch((error) => {
               console.log(error);
               setMessage(
                 "You should recieve a reset password email if the provided email exists."
               );
+              setIsSending(false);
             });
         } else {
           setMessage(
             "Password of accounts made with providers cannot be reset!"
           );
+          setIsSending(false);
         }
       });
   };
@@ -66,7 +73,9 @@ const ForgotPassword = (props) => {
       />
     </div>
   ) : (
-    <> </>
+    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+      <Spin indicator={<LoadingOutlined />} size="large" />
+    </div>
   );
 };
 

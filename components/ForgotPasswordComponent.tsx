@@ -14,7 +14,7 @@ interface IForgotFormProps {
 const ForgotPasswordComponent = (props: IForgotFormProps) => {
   return (
     <div className={"container-sm " + styles.forgotpass_container}>
-      <Divider className={styles.divider}>Reset Password</Divider>
+      <Divider className={styles.divider}>Forgot Password</Divider>
       <Form name="forgotPassForm" onFinish={props.submitCallback}>
         <Form.Item
           name="email"

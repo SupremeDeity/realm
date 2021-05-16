@@ -1,9 +1,10 @@
 import RegisterForm from "../components/RegisterForm";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import firebase from "firebase/app";
-import { message as Message } from "antd";
+import { message as Message, Spin } from "antd";
 import initializeFirebase from "../services/firebase";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const Register = () => {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -72,7 +73,9 @@ const Register = () => {
       />
     </div>
   ) : (
-    <> </>
+    <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+      <Spin indicator={<LoadingOutlined />} size="large" />
+    </div>
   );
 };
 
