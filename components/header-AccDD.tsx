@@ -22,13 +22,14 @@ const AccDropdown = (props) => {
 
   const GetAvatar = () => {
     if (props.user.photoURL) {
-      return <Avatar src={props.user.photoURL} size={30}></Avatar>;
+      return <Avatar alt="avatar" src={props.user.photoURL} size={30}></Avatar>;
     } else {
       if (props.user.displayName) {
         return (
           <Avatar
             size={30}
             style={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+            alt="avatar"
           >
             {props.user.displayName.charAt(0).toUpperCase()}
           </Avatar>
@@ -38,6 +39,7 @@ const AccDropdown = (props) => {
           <Avatar
             size={30}
             style={{ backgroundColor: "#87d068" }}
+            alt="avatar"
             icon={
               <UserOutlined style={{ margin: "auto", fontSize: "1.2rem" }} />
             }

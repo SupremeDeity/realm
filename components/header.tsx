@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import AccDropdown from "./header-AccDD";
@@ -79,6 +79,7 @@ const Header = () => {
               width="24px"
               height="24px"
               className="img-thumbnail d-inline-block align-text-top"
+              alt="header icon"
             ></Image>
             <label className="mx-1">Realm</label>
           </a>

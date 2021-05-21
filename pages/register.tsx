@@ -38,18 +38,20 @@ const Register = () => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(props.email, props.password)
-      .then(() => {
-        setMessage("");
-        setIsRegistering(false);
-
-        Message.success(
-          {
-            content: "Registeration Successful!",
-            key: "registerMessage",
-          },
-          3
-        );
-        router.push("../");
+      .then((credential) => {
+        credential.user
+          .updateProfile({ displayName: props.username })
+          .then(() => {
+            setMessage("");
+            setIsRegistering(false);
+            Message.success(
+              {
+                content: "Registeration Successful!",
+                key: "registerMessage",
+              },
+              3
+            );
+          });
       })
       .catch((error) => {
         setIsRegistering(false);

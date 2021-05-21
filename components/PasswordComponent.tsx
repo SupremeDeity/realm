@@ -40,7 +40,11 @@ const PasswordComponent = () => {
 
   const getFormat = (percent) => {
     if (percent <= 33) {
-      return <label style={{ color: "var(--bs-danger)" }}>Weak</label>;
+      return (
+        <label style={{ color: "var(--bs-danger)", fontWeight: "bold" }}>
+          Weak
+        </label>
+      );
     } else if (percent <= 66) {
       return <label style={{ color: "var(--bs-primary)" }}>Medium</label>;
     } else if (percent <= 100) {
@@ -76,6 +80,7 @@ const PasswordComponent = () => {
         strokeColor={getStrokeColor()}
         steps={10}
         className="mb-4"
+        trailColor="#dbdbdb"
       />
     </>
   );
