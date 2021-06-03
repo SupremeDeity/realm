@@ -1,4 +1,4 @@
-import { UserOutlined } from "@ant-design/icons";
+import { MailOutlined } from "@ant-design/icons";
 import { Button, Divider, Form, Input, Typography } from "antd";
 import React from "react";
 import styles from "../styles/ForgotPasswordForm.module.scss";
@@ -22,7 +22,7 @@ const ForgotPasswordComponent = (props: IForgotFormProps) => {
         >
           <Input
             type="email"
-            prefix={<UserOutlined />}
+            prefix={<MailOutlined />}
             placeholder="Email Address"
           ></Input>
         </Form.Item>

@@ -5,7 +5,11 @@ import { Form, Input, Progress } from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 
-const PasswordComponent = () => {
+interface PasswordComponentProps {
+  required: boolean;
+}
+
+const PasswordComponent = (props: PasswordComponentProps) => {
   const [percentage, setPercentage] = useState(0);
 
   const validatePassword = (event) => {
@@ -41,14 +45,28 @@ const PasswordComponent = () => {
   const getFormat = (percent) => {
     if (percent <= 33) {
       return (
-        <label style={{ color: "var(--bs-danger)", fontWeight: "bold" }}>
+        <label
+          style={{
+            color: "var(--bs-danger)",
+            fontWeight: "bold",
+            userSelect: "none",
+          }}
+        >
           Weak
         </label>
       );
     } else if (percent <= 66) {
-      return <label style={{ color: "var(--bs-primary)" }}>Medium</label>;
+      return (
+        <label style={{ color: "var(--bs-primary)", userSelect: "none" }}>
+          Medium
+        </label>
+      );
     } else if (percent <= 100) {
-      return <label style={{ color: "var(--bs-success)" }}>Strong</label>;
+      return (
+        <label style={{ color: "var(--bs-success)", userSelect: "none" }}>
+          Strong
+        </label>
+      );
     }
   };
 
@@ -59,7 +77,7 @@ const PasswordComponent = () => {
         style={{ margin: "auto" }}
         rules={[
           {
-            required: true,
+            required: props.required,
             message: "Please input a password!",
             min: 6,
             pattern: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{6,32}$/,

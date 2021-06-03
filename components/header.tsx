@@ -5,18 +5,47 @@ import AccDropdown from "./header-AccDD";
 import { DefaultUser } from "../components/GlobalUserContext";
 import firebase from "firebase/app";
 import initializeFirebase from "../services/firebase";
+import { Spin } from "antd";
 
-const Header = () => {
+let NavLinks = ["Home", "Docs", "API", "Pricing"];
+let routes = { Home: "/", Docs: "#", API: "#", Pricing: "#" };
+
+interface HeaderProps {
+  active: "Home" | "Docs" | "API" | "Pricing" | "NONE";
+}
+
+const Header = (props: HeaderProps) => {
   let [isLoggedIn, setIsLoggedIn] = useState(false);
   let router = useRouter();
   let [user, setUser] = useState(DefaultUser);
+  let [isCheckingState, setIsCheckingState] = useState(true);
+
+  const generateLinks = () => {
+    let active = props.active;
+    return NavLinks.map((value) => {
+      return (
+        <li key={value} className="nav-item me-2">
+          <a
+            className={"nav-link" + (active == value ? " fw-bold active" : "")}
+            aria-current="page"
+            href={routes[value]}
+          >
+            {value}
+          </a>
+        </li>
+      );
+    });
+  };
 
   const checkLoginSession = () => {
+    setIsCheckingState(true); // just in case
+
     initializeFirebase();
 
     firebase.auth().onAuthStateChanged((currentUser: firebase.User) => {
       if (!currentUser) {
         setIsLoggedIn(false);
+        setIsCheckingState(false);
         return;
       } else {
         var username = currentUser.displayName
@@ -30,6 +59,7 @@ const Header = () => {
           photoURL: currentUser.photoURL,
         });
         setIsLoggedIn(true);
+        setIsCheckingState(false);
 
         return;
       }
@@ -52,6 +82,8 @@ const Header = () => {
   const AccStatus = () => {
     if (isLoggedIn) {
       return <AccDropdown user={user} />;
+    } else if (isCheckingState) {
+      return <Spin />;
     } else {
       return (
         <div>
@@ -87,32 +119,7 @@ const Header = () => {
             className="collapse navbar-collapse flex-row-reverse"
             id="navbarSupportedContent"
           >
-            <ul className="navbar-nav">
-              <li className="nav-item me-2">
-                <a
-                  className="nav-link active fw-bold"
-                  aria-current="page"
-                  href="#"
-                >
-                  Home
-                </a>
-              </li>
-              <li className="nav-item me-2">
-                <a className="nav-link" href="#">
-                  Docs
-                </a>
-              </li>
-              <li className="nav-item me-2">
-                <a className="nav-link" href="#">
-                  API
-                </a>
-              </li>
-              <li className="nav-item me-2">
-                <a className="nav-link" href="#">
-                  Pricing
-                </a>
-              </li>
-            </ul>
+            <ul className="navbar-nav">{generateLinks()}</ul>
           </div>
           {AccStatus()}
         </div>

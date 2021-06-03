@@ -38,7 +38,7 @@ const RegisterForm = (props: IRegisterFormProps) => {
           ></Input>
         </Form.Item>
 
-        <PasswordComponent />
+        <PasswordComponent required={true} />
 
         {props.message ? (
           <Form.Item>

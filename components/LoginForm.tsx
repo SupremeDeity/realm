@@ -1,6 +1,6 @@
 import React from "react";
 import { Checkbox, Divider, Form, Input, Button, Typography } from "antd";
-import { UserOutlined, LockOutlined, GoogleOutlined } from "@ant-design/icons";
+import { MailOutlined, LockOutlined, GoogleOutlined } from "@ant-design/icons";
 import styles from "../styles/LoginForm.module.scss";
 
 const { Text } = Typography;
@@ -23,7 +23,7 @@ const LoginForm = (props: ILoginFormProps) => {
         >
           <Input
             type="email"
-            prefix={<UserOutlined />}
+            prefix={<MailOutlined />}
             placeholder="Email Address"
           ></Input>
         </Form.Item>

@@ -64,7 +64,7 @@ const AccDropdown = (props) => {
       </Menu.Item>
       <hr></hr>
       <Menu.Item>
-        <a rel="noopener noreferrer" href="#">
+        <a rel="noopener noreferrer" href="./settings">
           Settings
         </a>
       </Menu.Item>

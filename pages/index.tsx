@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Header from "../components/header";
 
+// TODO: Take care of styling
+
 export default function Home() {
   return (
     <>
@@ -16,7 +18,7 @@ export default function Home() {
           content="Practice for nextJS, firebase and react."
         />
       </Head>
-      <Header />
+      <Header active="Home" />
     </>
   );
 }
