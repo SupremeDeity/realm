@@ -29,7 +29,7 @@ const ResetPasswordComponent = (props: IResetPasswordProps) => {
             {props.email}
           </Text>
         </Form.Item>
-        <PasswordComponent />
+        <PasswordComponent required={true} />
         {props.message ? (
           <Form.Item>
             <Text type="success">{props.message}</Text>
