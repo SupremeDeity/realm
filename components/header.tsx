@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import AccDropdown from "./header-AccDD";
-import { DefaultUser } from "../components/GlobalUserContext";
+import { isSameUser, PrototypeUser } from "../components/GlobalUserContext";
 import firebase from "firebase/app";
 import initializeFirebase from "../services/firebase";
-import { Spin } from "antd";
+import { Skeleton, Spin } from "antd";
 
 let NavLinks = ["Home", "Docs", "API", "Pricing"];
 let routes = { Home: "/", Docs: "#", API: "#", Pricing: "#" };
@@ -17,7 +17,7 @@ interface HeaderProps {
 const Header = (props: HeaderProps) => {
   let [isLoggedIn, setIsLoggedIn] = useState(false);
   let router = useRouter();
-  let [user, setUser] = useState(DefaultUser);
+  let [user, setUser] = useState(PrototypeUser);
   let [isCheckingState, setIsCheckingState] = useState(true);
 
   const generateLinks = () => {
@@ -41,29 +41,39 @@ const Header = (props: HeaderProps) => {
     setIsCheckingState(true); // just in case
 
     initializeFirebase();
+    if (user === PrototypeUser) {
+      firebase.auth().onAuthStateChanged((currentUser: firebase.User) => {
+        if (!currentUser) {
+          setIsLoggedIn(false);
+          setIsCheckingState(false);
+          return;
+        } else {
+          var username = currentUser.displayName
+            ? currentUser.displayName
+            : currentUser.uid.slice(0, 5);
 
-    firebase.auth().onAuthStateChanged((currentUser: firebase.User) => {
-      if (!currentUser) {
-        setIsLoggedIn(false);
-        setIsCheckingState(false);
-        return;
-      } else {
-        var username = currentUser.displayName
-          ? currentUser.displayName
-          : currentUser.uid.slice(0, 5);
+          const cUser = {
+            email: currentUser.email,
+            displayName: username,
+            id: currentUser.uid,
+            photoURL: currentUser.photoURL,
+          };
 
-        setUser({
-          email: currentUser.email,
-          displayName: username,
-          id: currentUser.uid,
-          photoURL: currentUser.photoURL,
-        });
-        setIsLoggedIn(true);
-        setIsCheckingState(false);
+          if (!isSameUser(cUser, user)) {
+            setUser({
+              email: currentUser.email,
+              displayName: username,
+              id: currentUser.uid,
+              photoURL: currentUser.photoURL,
+            });
+          }
+          setIsLoggedIn(true);
+          setIsCheckingState(false);
 
-        return;
-      }
-    });
+          return;
+        }
+      });
+    }
   };
 
   // This validates the login session at component load.
@@ -83,7 +93,7 @@ const Header = (props: HeaderProps) => {
     if (isLoggedIn) {
       return <AccDropdown user={user} />;
     } else if (isCheckingState) {
-      return <Spin />;
+      return <Skeleton.Avatar active />;
     } else {
       return (
         <div>
