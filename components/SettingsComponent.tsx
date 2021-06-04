@@ -20,7 +20,6 @@ const SettingsComponent = (props) => {
   const [avatarImg, setAvatarImg] = useState("");
 
   const GetAvatar = (size?, img?: string) => {
-    console.log(img);
     if (img) {
       return <Avatar shape="square" alt="avatar" src={img} size={size} />;
     } else if (props.user.photoURL) {
@@ -68,15 +67,17 @@ const SettingsComponent = (props) => {
 
     if (!isLt2M) {
       message.error("Avatar file size should be less than 2MB.");
+      return;
     } else if (!isCorrectType) {
       message.error("Avatar file type incorrect.");
+      return;
     } else {
       let src = URL.createObjectURL(event.file);
 
       setAvatarImg(src);
     }
 
-    return event.file && event.fileList;
+    return [event.file];
   };
 
   return (
@@ -159,6 +160,13 @@ const SettingsComponent = (props) => {
           >
             <Input type="password" />
           </Form.Item>
+          {props.message ? (
+            <Form.Item>
+              <Text type="danger">{props.message}</Text>
+            </Form.Item>
+          ) : (
+            <div />
+          )}
 
           <Form.Item>
             <Button htmlType="submit" type="primary">
