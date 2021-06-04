@@ -50,10 +50,14 @@ const Settings = () => {
     checkLoginSession();
   }, []);
 
+  const onSave = (props) => {
+    console.log(props);
+  };
+
   return !isChecking ? (
     <div>
       <Header active="NONE" />
-      <SettingsComponent user={user} />
+      <SettingsComponent user={user} onSave={onSave} />
     </div>
   ) : (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">

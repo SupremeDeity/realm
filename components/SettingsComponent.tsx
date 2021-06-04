@@ -61,25 +61,22 @@ const SettingsComponent = (props) => {
   };
 
   // Return false to manually handle uploding
-  const beforeUpload = (info: RcFile) => {
-    let isLt2M = info.size / 1024 / 1024 < 2; // < 2MB
-    let isCorrectType = info.type === "image/jpeg" || info.type === "image/png"; // only png & jpg
+  const getValueProp = (event) => {
+    let isLt2M = event.file.size / 1024 / 1024 < 2; // < 2MB
+    let isCorrectType =
+      event.file.type === "image/jpeg" || event.file.type === "image/png"; // only png & jpg
 
     if (!isLt2M) {
       message.error("Avatar file size should be less than 2MB.");
     } else if (!isCorrectType) {
       message.error("Avatar file type incorrect.");
     } else {
-      let src = URL.createObjectURL(info);
+      let src = URL.createObjectURL(event.file);
 
       setAvatarImg(src);
     }
 
-    return false;
-  };
-
-  const onSave = (props) => {
-    console.log(props);
+    return event.file && event.fileList;
   };
 
   return (
@@ -95,14 +92,21 @@ const SettingsComponent = (props) => {
         }}
       >
         <Form className={styles.form} size="middle" onFinish={props.onSave}>
-          <Form.Item className={styles.formItem}>
+          <Form.Item
+            valuePropName="fileList"
+            getValueFromEvent={getValueProp}
+            name="image"
+            className={styles.formItem}
+          >
             <Upload
               showUploadList={false}
               accept="image/jpeg,image/png"
               maxCount={1}
               listType="picture-card"
               style={{ display: "flex !important" }}
-              beforeUpload={beforeUpload}
+              beforeUpload={() => {
+                return false;
+              }}
             >
               {GetAvatar(100, avatarImg)}
             </Upload>
@@ -136,22 +140,31 @@ const SettingsComponent = (props) => {
               tooltip="Must contain atleast 6 characters with 1 uppercase, 1 lowercase and 1 numeric character."
               label="New Password"
               className={styles.formItem}
-              name="newName"
             >
               <PasswordComponent required={false} />
             </Form.Item>
           </Card>
           <Form.Item
+            rules={[
+              {
+                required: true,
+                message: "Please input your current password.",
+              },
+            ]}
             required={true}
             tooltip="The current password, this is required to make any changes."
             label="Current password"
             className={styles.formItem}
-            name="newPass"
+            name="currentPass"
           >
             <Input type="password" />
           </Form.Item>
 
-          <Button type="primary">Save</Button>
+          <Form.Item>
+            <Button htmlType="submit" type="primary">
+              Save
+            </Button>
+          </Form.Item>
         </Form>
       </Card>
     </div>
