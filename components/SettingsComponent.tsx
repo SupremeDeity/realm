@@ -1,17 +1,6 @@
-import { UploadOutlined, UserOutlined } from "@ant-design/icons";
-import {
-  Avatar,
-  Button,
-  Card,
-  Divider,
-  Form,
-  Input,
-  message,
-  Upload,
-} from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import { Avatar, Button, Card, Form, Input, message, Upload } from "antd";
 import Text from "antd/lib/typography/Text";
-import { UploadChangeParam } from "antd/lib/upload";
-import { RcFile, UploadFile } from "antd/lib/upload/interface";
 import React, { useState } from "react";
 import styles from "../styles/SettingsComponent.module.scss";
 import PasswordComponent from "./PasswordComponent";
@@ -81,7 +70,7 @@ const SettingsComponent = (props) => {
   };
 
   return (
-    <div className="container-sm text-center">
+    <div className="container-md text-center">
       <Card
         className={styles.card}
         title="Settings"
@@ -119,7 +108,7 @@ const SettingsComponent = (props) => {
           </Form.Item>
 
           <Card
-            className={"fw-bold mb-3 "}
+            className={"fw-bold mb-3 " + styles.innerCard}
             type="inner"
             title="Change Credentials"
             headStyle={{

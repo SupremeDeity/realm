@@ -115,7 +115,7 @@ const Header = (props: HeaderProps) => {
     <>
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/">
             <Image
               src="/favicon.ico"
               width="24px"

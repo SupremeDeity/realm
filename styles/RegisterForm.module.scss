@@ -1,5 +1,13 @@
 .register_container {
+    min-width: 30%;
     max-width: 40%;
+}
+
+@media only screen and (max-width: 800px) {
+    .register_container {
+        min-width: 40%;
+        max-width: 80%;
+    }
 }
 
 .register_form_forgot {
@@ -8,7 +16,7 @@
 
 .divider {
     font-family: 'Roboto', sans-serif;
-    font-weight: lighter !important;
+    font-weight: 300 !important;
 }
 
 .providerIcon {
