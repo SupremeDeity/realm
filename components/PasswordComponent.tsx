@@ -4,6 +4,7 @@
 import { Form, Input, Progress } from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
+import styles from "../styles/PasswordComponent.module.scss";
 
 interface PasswordComponentProps {
   required: boolean;
@@ -34,11 +35,11 @@ const PasswordComponent = (props: PasswordComponentProps) => {
 
   const getStrokeColor = () => {
     if (percentage <= 33) {
-      return "var(--bs-danger)";
+      return "#dc3545";
     } else if (percentage <= 66) {
-      return "var(--bs-primary)";
+      return "#0d6efd";
     } else {
-      return "var(--bs-success)";
+      return "#198754";
     }
   };
 
@@ -47,7 +48,7 @@ const PasswordComponent = (props: PasswordComponentProps) => {
       return (
         <label
           style={{
-            color: "var(--bs-danger)",
+            color: "#dc3545",
             fontWeight: "bold",
             userSelect: "none",
           }}
@@ -57,15 +58,11 @@ const PasswordComponent = (props: PasswordComponentProps) => {
       );
     } else if (percent <= 66) {
       return (
-        <label style={{ color: "var(--bs-primary)", userSelect: "none" }}>
-          Medium
-        </label>
+        <label style={{ color: "#0d6efd", userSelect: "none" }}>Medium</label>
       );
     } else if (percent <= 100) {
       return (
-        <label style={{ color: "var(--bs-success)", userSelect: "none" }}>
-          Strong
-        </label>
+        <label style={{ color: "#198754", userSelect: "none" }}>Strong</label>
       );
     }
   };
@@ -93,11 +90,9 @@ const PasswordComponent = (props: PasswordComponentProps) => {
       </Form.Item>
       <Progress
         format={(percent) => getFormat(percent)}
-        success={{ percent: 66 }}
         percent={percentage}
         strokeColor={getStrokeColor()}
-        steps={10}
-        className="mb-4"
+        className={"mb-4" + styles.progressBar}
         trailColor="#dbdbdb"
       />
     </>
