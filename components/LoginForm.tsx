@@ -1,8 +1,8 @@
 import React from "react";
 import { Checkbox, Divider, Form, Input, Button, Typography } from "antd";
 import { MailOutlined, LockOutlined, GoogleOutlined } from "@ant-design/icons";
-import styles from "../styles/LoginForm.module.scss";
-import Header from "./header";
+import styles from "@styles/LoginForm.module.scss";
+import Header from "@components/header";
 
 const { Text } = Typography;
 
@@ -25,8 +25,9 @@ const LoginForm = (props: ILoginFormProps) => {
             rules={[{ required: true, message: "Please input your email!" }]}
           >
             <Input
+              className={styles.input}
               type="email"
-              prefix={<MailOutlined />}
+              prefix={<MailOutlined style={{ color: "var(--tc-white)" }} />}
               placeholder="Email Address"
             ></Input>
           </Form.Item>
@@ -35,8 +36,9 @@ const LoginForm = (props: ILoginFormProps) => {
             rules={[{ required: true, message: "Please input your password!" }]}
           >
             <Input
+              className={styles.input}
               type="password"
-              prefix={<LockOutlined />}
+              prefix={<LockOutlined style={{ color: "var(--tc-white)" }} />}
               placeholder="Password"
             ></Input>
           </Form.Item>
@@ -49,7 +51,9 @@ const LoginForm = (props: ILoginFormProps) => {
           )}
           <Form.Item>
             <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
+              <Checkbox style={{ color: "var(--tc-white)" }}>
+                Remember me
+              </Checkbox>
             </Form.Item>
 
             <a className={styles.login_form_forgot} href="../forgotpassword">
@@ -66,7 +70,7 @@ const LoginForm = (props: ILoginFormProps) => {
               Log in
             </Button>
           </Form.Item>
-          <Form.Item>
+          <Form.Item style={{ color: "var(--tc-white)" }}>
             Don't have an account? <a href="/register">Register now</a>
           </Form.Item>
           <Form.Item>

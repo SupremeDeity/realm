@@ -1,9 +1,9 @@
-import { UserOutlined } from "@ant-design/icons";
+import { LockOutlined, SettingOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Button, Card, Form, Input, message, Upload } from "antd";
 import Text from "antd/lib/typography/Text";
 import React, { useState } from "react";
-import styles from "../styles/SettingsComponent.module.scss";
-import PasswordComponent from "./PasswordComponent";
+import styles from "@styles/SettingsComponent.module.scss";
+import PasswordComponent from "@components/PasswordComponent";
 
 const SettingsComponent = (props) => {
   const [avatarImg, setAvatarImg] = useState("");
@@ -73,12 +73,17 @@ const SettingsComponent = (props) => {
     <div className="container-md text-center">
       <Card
         className={styles.card}
-        title="Settings"
+        title={
+          <Text style={{ color: "var(--tc-white)" }}>
+            <SettingOutlined /> Settings
+          </Text>
+        }
         headStyle={{
           fontFamily: "Roboto",
           fontWeight: "bold",
-          backgroundColor: "var(--tc-whiteish)",
+          color: "var(--tc-white)",
           userSelect: "none",
+          borderBottomColor: "var(--bs-gray)",
         }}
       >
         <Form className={styles.form} size="middle" onFinish={props.onSave}>
@@ -102,33 +107,51 @@ const SettingsComponent = (props) => {
             </Upload>
           </Form.Item>
           <Form.Item style={{ flex: "0" }} className={styles.formItem}>
-            <Text style={{ userSelect: "none" }} strong>
+            <Text
+              style={{ color: "var(--tc-white)", userSelect: "none" }}
+              strong
+            >
               {props.user.displayName}
             </Text>
           </Form.Item>
 
           <Card
+            style={{ borderColor: "var(--bs-gray)" }}
             className={"fw-bold mb-3 " + styles.innerCard}
             type="inner"
             title="Change Credentials"
             headStyle={{
               fontWeight: "bold",
-              backgroundColor: "var(--tc-gray)",
+              color: "var(--tc-white)",
+              backgroundColor: "var(--tc-gray-dark)",
+              borderColor: "var(--bs-gray)",
               textAlign: "left",
             }}
-            bodyStyle={{ backgroundColor: "var(--tc-whiteish)" }}
+            bodyStyle={{
+              backgroundColor: "var(--tc-whiteish)",
+            }}
           >
             <Form.Item
-              label="New Username"
+              label={
+                <Text style={{ color: "var(--tc-white)" }}>New Username: </Text>
+              }
+              colon={false}
               className={styles.formItem}
               name="newName"
             >
-              <Input type="text" />
+              <Input
+                prefix={<UserOutlined />}
+                className={styles.input}
+                type="text"
+              />
             </Form.Item>
 
             <Form.Item
-              tooltip="Must contain atleast 6 characters with 1 uppercase, 1 lowercase and 1 numeric character."
-              label="New Password"
+              // tooltip="Must contain atleast 6 characters with 1 uppercase, 1 lowercase and 1 numeric character."
+              label={
+                <Text style={{ color: "var(--tc-white)" }}>New Password: </Text>
+              }
+              colon={false}
               className={styles.formItem}
             >
               <PasswordComponent required={false} />
@@ -142,12 +165,20 @@ const SettingsComponent = (props) => {
               },
             ]}
             required={true}
-            tooltip="The current password, this is required to make any changes."
-            label="Current password"
+            // tooltip="The current password, this is required to make any changes."
+            label={
+              <Text style={{ color: "var(--tc-white)" }}>
+                Current Password:
+              </Text>
+            }
             className={styles.formItem}
             name="currentPass"
           >
-            <Input type="password" />
+            <Input
+              prefix={<LockOutlined />}
+              className={styles.input}
+              type="password"
+            />
           </Form.Item>
           {props.message ? (
             <Form.Item>

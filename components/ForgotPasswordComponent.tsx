@@ -1,7 +1,7 @@
 import { MailOutlined } from "@ant-design/icons";
 import { Button, Divider, Form, Input, Typography } from "antd";
 import React from "react";
-import styles from "../styles/ForgotPasswordForm.module.scss";
+import styles from "@styles/ForgotPasswordForm.module.scss";
 
 const { Text } = Typography;
 

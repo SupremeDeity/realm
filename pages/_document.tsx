@@ -11,7 +11,7 @@ class AugmentDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body>
+        <body style={{ background: "var(--tc-background)" }}>
           <Main />
           <NextScript />
         </body>

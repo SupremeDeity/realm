@@ -1,10 +1,10 @@
-body {
-   // background-color: var(--bs-gray-dark) !important;
-}
-
 * {
-   --tc-whiteish: #f5f3f3;
-   --tc-gray: #d3d3d3;
+   --tc-white: #d7dadc;
+   --tc-gray: #686157;
+   --tc-background: #242627;
+   
 }
 
-//@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+// Bootstrap and its default variables
+@import "node_modules/bootstrap/scss/bootstrap";

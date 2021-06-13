@@ -4,7 +4,7 @@
 import { Form, Input, Progress } from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
-import styles from "../styles/PasswordComponent.module.scss";
+import styles from "@styles/PasswordComponent.module.scss";
 
 interface PasswordComponentProps {
   required: boolean;
@@ -82,6 +82,7 @@ const PasswordComponent = (props: PasswordComponentProps) => {
         ]}
       >
         <Input
+          className={styles.input}
           type="password"
           prefix={<LockOutlined />}
           placeholder="Password"
@@ -93,7 +94,7 @@ const PasswordComponent = (props: PasswordComponentProps) => {
         percent={percentage}
         strokeColor={getStrokeColor()}
         className={"mb-4" + styles.progressBar}
-        trailColor="#dbdbdb"
+        trailColor="var(--bs-gray-dark)"
       />
     </>
   );

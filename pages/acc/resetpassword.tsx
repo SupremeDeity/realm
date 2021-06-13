@@ -1,14 +1,13 @@
 import { useRouter } from "next/router";
 import Error from "next/error";
 import { useEffect, useState } from "react";
-import ResetPasswordComponent from "../../components/ResetPasswordComponent";
-import initializeFirebase from "../../services/firebase";
+import ResetPasswordComponent from "@components/ResetPasswordComponent";
+import initializeFirebase from "@services/firebase";
 import firebase from "firebase/app";
 import React from "react";
 import { message as Message } from "antd";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import Login from "../login";
 
 // TODO: Globalize this
 interface PageError {

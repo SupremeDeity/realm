@@ -4,10 +4,10 @@ import firebase from "firebase/app";
 import "firebase/storage";
 import router from "next/router";
 import React, { useEffect, useState } from "react";
-import { isSameUser, PrototypeUser } from "../components/GlobalUserContext";
-import Header from "../components/header";
-import SettingsComponent from "../components/SettingsComponent";
-import initializeFirebase from "../services/firebase";
+import { isSameUser, PrototypeUser } from "@components/GlobalUserContext";
+import Header from "@components/header";
+import SettingsComponent from "@components/SettingsComponent";
+import initializeFirebase from "@services/firebase";
 
 const Settings = () => {
   const [isChecking, setIsChecking] = useState(true);

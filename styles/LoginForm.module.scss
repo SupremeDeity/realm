@@ -17,6 +17,8 @@
 .divider {
     font-family: 'Roboto', sans-serif;
     font-weight: 300 !important;
+    color: var(--bs-light) !important;
+    border-top-color: #989185 !important;
 }
 
 .providerIcon {
@@ -35,4 +37,16 @@
 .form_login_button {
     margin: auto;
     display: block;
+}
+
+.input {
+    background-color: var(--bs-dark) !important;
+    color: var(--bs-light);
+    border-color: var(--bs-gray);
+
+    input {
+        background-color: var(--bs-dark) !important;
+        color: var(--bs-light);
+    }
+
 }

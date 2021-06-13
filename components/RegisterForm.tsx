@@ -1,9 +1,9 @@
 import { Divider, Form, Input, Button, Typography } from "antd";
 import { UserOutlined, MailOutlined } from "@ant-design/icons";
 import * as React from "react";
-import styles from "../styles/RegisterForm.module.scss";
-import PasswordComponent from "./PasswordComponent";
-import Header from "./header";
+import styles from "@styles/RegisterForm.module.scss";
+import PasswordComponent from "@components/PasswordComponent";
+import Header from "@components/header";
 
 const { Text } = Typography;
 
@@ -25,6 +25,7 @@ const RegisterForm = (props: IRegisterFormProps) => {
             rules={[{ required: true, message: "Please input your username!" }]}
           >
             <Input
+              className={styles.input}
               type="text"
               prefix={<UserOutlined />}
               placeholder="Username"
@@ -35,6 +36,7 @@ const RegisterForm = (props: IRegisterFormProps) => {
             rules={[{ required: true, message: "Please input your email!" }]}
           >
             <Input
+              className={styles.input}
               type="email"
               prefix={<MailOutlined />}
               placeholder="Email Address"
@@ -60,7 +62,7 @@ const RegisterForm = (props: IRegisterFormProps) => {
             >
               Register
             </Button>
-            <Form.Item>
+            <Form.Item style={{ color: "var(--tc-white)" }}>
               Already have an account? <a href="/login">Login now</a>
             </Form.Item>
           </Form.Item>

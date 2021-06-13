@@ -1,8 +1,15 @@
 // Header component - Account dropdown
 import * as React from "react";
 
+import styles from "@styles/headerDD.module.scss";
 import { Menu, Dropdown, Typography, Avatar } from "antd";
-import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  DownOutlined,
+  LoginOutlined,
+  LogoutOutlined,
+  SettingOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import firebase from "firebase/app";
 import { useRouter } from "next/router";
 
@@ -50,11 +57,25 @@ const AccDropdown = (props) => {
   };
 
   const menu = (
-    <Menu style={{ minWidth: 100 }}>
-      <Menu.Item className="d-block">
+    <Menu
+      style={{
+        borderBottomLeftRadius: ".5em",
+        borderBottomRightRadius: ".5em",
+        minWidth: 100,
+        background: "var(--bs-gray-dark)",
+        color: "var(--tc-gray)",
+      }}
+    >
+      <Menu.Item
+        style={{
+          background: "var(--tc-white)",
+          borderRadius: "2px",
+        }}
+      />
+      <Menu.Item className={"d-block " + styles.menuItemAcc}>
         {GetAvatar()}
         <Text
-          style={{ width: 100 }}
+          style={{ width: 100, color: "var(--tc-white)" }}
           ellipsis={true}
           className="mx-1"
           strong={true}
@@ -62,25 +83,38 @@ const AccDropdown = (props) => {
           {props.user.displayName}
         </Text>
       </Menu.Item>
-      <hr></hr>
-      <Menu.Item>
-        <a rel="noopener noreferrer" href="./settings">
+      <hr />
+      <Menu.Item
+        className={styles.menuItem}
+        icon={<SettingOutlined style={{ color: "var(--tc-white)" }} />}
+      >
+        <a
+          style={{ color: "var(--tc-white)" }}
+          rel="noopener noreferrer"
+          href="./settings"
+        >
           Settings
         </a>
       </Menu.Item>
-      <Menu.Item danger onClick={logoutHandler}>
+      <Menu.Item
+        danger
+        onClick={logoutHandler}
+        icon={<LogoutOutlined style={{ color: "var(--tc-white)" }} />}
+      >
         Log Out
       </Menu.Item>
     </Menu>
   );
 
   return (
-    <Dropdown overlay={menu}>
-      <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-        {GetAvatar()}
-        <DownOutlined className="mx-1" />
-      </a>
-    </Dropdown>
+    <div>
+      <Dropdown overlay={menu}>
+        <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+          {GetAvatar()}
+          <DownOutlined className="mx-1" />
+        </a>
+      </Dropdown>
+    </div>
   );
 };
 

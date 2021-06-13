@@ -1,8 +1,7 @@
-import { LockOutlined } from "@ant-design/icons";
-import { Button, Divider, Form, Input, Typography } from "antd";
+import { Button, Divider, Form, Typography } from "antd";
 import React from "react";
-import styles from "../styles/ResetPassword.module.scss";
-import PasswordComponent from "./PasswordComponent";
+import styles from "@styles/ResetPassword.module.scss";
+import PasswordComponent from "@components/PasswordComponent";
 
 const { Text } = Typography;
 

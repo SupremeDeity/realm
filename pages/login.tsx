@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import firebase from "firebase/app";
 import { useRouter } from "next/router";
-import LoginForm from "../components/LoginForm";
+import LoginForm from "@components/LoginForm";
 import { message as Message, Spin } from "antd";
-import initializeFirebase from "../services/firebase";
+import initializeFirebase from "@services/firebase";
 import { LoadingOutlined } from "@ant-design/icons";
 
 const Login = () => {

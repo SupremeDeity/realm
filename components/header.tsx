@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import AccDropdown from "./header-AccDD";
-import { isSameUser, PrototypeUser } from "../components/GlobalUserContext";
+import { isSameUser, PrototypeUser } from "@components/GlobalUserContext";
 import firebase from "firebase/app";
-import initializeFirebase from "../services/firebase";
-import { Skeleton, Spin } from "antd";
+import initializeFirebase from "@services/firebase";
+import { Skeleton } from "antd";
 
 let NavLinks = ["Home", "Docs", "API", "Pricing"];
 let routes = { Home: "/", Docs: "#", API: "#", Pricing: "#" };
@@ -113,7 +113,10 @@ const Header = (props: HeaderProps) => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+      <nav
+        className={"navbar navbar-expand-sm navbar-dark"}
+        style={{ background: "var(--bs-gray-dark)" }}
+      >
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
             <Image

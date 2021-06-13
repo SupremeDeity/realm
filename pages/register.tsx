@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import firebase from "firebase/app";
 import { message as Message, Spin } from "antd";
-import initializeFirebase from "../services/firebase";
+import initializeFirebase from "@services/firebase";
 import { LoadingOutlined } from "@ant-design/icons";
 
 const Register = () => {

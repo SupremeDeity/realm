@@ -4,8 +4,8 @@ import firebase from "firebase/app";
 import { useRouter } from "next/router";
 import * as React from "react";
 import { useEffect, useState } from "react";
-import ForgotPasswordComponent from "../components/ForgotPasswordComponent";
-import initializeFirebase from "../services/firebase";
+import ForgotPasswordComponent from "@components/ForgotPasswordComponent";
+import initializeFirebase from "@services/firebase";
 
 const ForgotPassword = (props) => {
   const [isSending, setIsSending] = useState(false);
