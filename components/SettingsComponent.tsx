@@ -4,6 +4,7 @@ import Text from "antd/lib/typography/Text";
 import React, { useState } from "react";
 import styles from "@styles/SettingsComponent.module.scss";
 import PasswordComponent from "@components/PasswordComponent";
+import Resizer from "react-image-file-resizer";
 
 const SettingsComponent = (props) => {
   const [avatarImg, setAvatarImg] = useState("");
@@ -50,6 +51,7 @@ const SettingsComponent = (props) => {
 
   // Return false to manually handle uploding
   const getValueProp = (event) => {
+    //console.log(event.file);
     let isLt2M = event.file.size / 1024 / 1024 < 2; // < 2MB
     let isCorrectType =
       event.file.type === "image/jpeg" || event.file.type === "image/png"; // only png & jpg
@@ -61,9 +63,28 @@ const SettingsComponent = (props) => {
       message.error("Avatar file type incorrect.");
       return;
     } else {
-      let src = URL.createObjectURL(event.file);
+      // Resize Image
+      try {
+        Resizer.imageFileResizer(
+          event.file,
+          300,
+          300,
+          "JPEG",
+          100,
+          0,
+          (uri) => {
+            //console.log(uri);
 
-      setAvatarImg(src);
+            let src = URL.createObjectURL(uri);
+            setAvatarImg(src);
+          },
+          "file"
+        );
+      } catch (err) {
+        console.log(err);
+      }
+
+      //setAvatarImg(src);
     }
 
     return [event.file];
@@ -86,7 +107,12 @@ const SettingsComponent = (props) => {
           borderBottomColor: "var(--bs-gray)",
         }}
       >
-        <Form className={styles.form} size="middle" onFinish={props.onSave}>
+        <Form
+          className={styles.form}
+          size="middle"
+          onFinish={props.onSave}
+          autoComplete="new-password"
+        >
           <Form.Item
             valuePropName="fileList"
             getValueFromEvent={getValueProp}
@@ -154,7 +180,7 @@ const SettingsComponent = (props) => {
               colon={false}
               className={styles.formItem}
             >
-              <PasswordComponent required={false} />
+              <PasswordComponent required={false} autoComplete="new-password" />
             </Form.Item>
           </Card>
           <Form.Item

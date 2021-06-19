@@ -4,6 +4,7 @@ import * as React from "react";
 import styles from "@styles/RegisterForm.module.scss";
 import PasswordComponent from "@components/PasswordComponent";
 import Header from "@components/header";
+import Link from "next/link";
 
 const { Text } = Typography;
 
@@ -43,7 +44,7 @@ const RegisterForm = (props: IRegisterFormProps) => {
             ></Input>
           </Form.Item>
 
-          <PasswordComponent required={true} />
+          <PasswordComponent required={true} autoComplete="new-password" />
 
           {props.message ? (
             <Form.Item>
@@ -63,7 +64,10 @@ const RegisterForm = (props: IRegisterFormProps) => {
               Register
             </Button>
             <Form.Item style={{ color: "var(--tc-white)" }}>
-              Already have an account? <a href="/login">Login now</a>
+              Already have an account?{" "}
+              <Link href="./login">
+                <a>Login now</a>
+              </Link>
             </Form.Item>
           </Form.Item>
           <Form.Item></Form.Item>

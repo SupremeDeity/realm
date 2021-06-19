@@ -5,6 +5,7 @@ import firebase from "firebase/app";
 import { message as Message, Spin } from "antd";
 import initializeFirebase from "@services/firebase";
 import { LoadingOutlined } from "@ant-design/icons";
+import Head from "next/head";
 
 const Register = () => {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -74,6 +75,9 @@ const Register = () => {
 
   return !isChecking ? (
     <div>
+      <Head>
+        <title>Realm - Register</title>
+      </Head>
       <RegisterForm
         emailPassCallback={emailPassCallback}
         isRegistering={isRegistering}
@@ -82,6 +86,9 @@ const Register = () => {
     </div>
   ) : (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+      <Head>
+        <title>Realm - Register</title>
+      </Head>
       <Spin indicator={<LoadingOutlined />} size="large" />
     </div>
   );

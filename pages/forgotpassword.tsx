@@ -6,6 +6,7 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import ForgotPasswordComponent from "@components/ForgotPasswordComponent";
 import initializeFirebase from "@services/firebase";
+import Head from "next/head";
 
 const ForgotPassword = (props) => {
   const [isSending, setIsSending] = useState(false);
@@ -66,6 +67,9 @@ const ForgotPassword = (props) => {
 
   return !isChecking ? (
     <div>
+      <Head>
+        <title>Realm - Forgot Password</title>
+      </Head>
       <ForgotPasswordComponent
         submitCallback={submitCallback}
         isSending={isSending}
@@ -74,6 +78,9 @@ const ForgotPassword = (props) => {
     </div>
   ) : (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+      <Head>
+        <title>Realm - Forgot Password</title>
+      </Head>
       <Spin indicator={<LoadingOutlined />} size="large" />
     </div>
   );

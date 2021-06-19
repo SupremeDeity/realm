@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import firebase from "firebase/app";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const { Text } = Typography;
 
@@ -88,13 +89,11 @@ const AccDropdown = (props) => {
         className={styles.menuItem}
         icon={<SettingOutlined style={{ color: "var(--tc-white)" }} />}
       >
-        <a
-          style={{ color: "var(--tc-white)" }}
-          rel="noopener noreferrer"
-          href="./settings"
-        >
-          Settings
-        </a>
+        <Link href="./settings">
+          <a style={{ color: "var(--tc-white)" }} rel="noopener noreferrer">
+            Settings
+          </a>
+        </Link>
       </Menu.Item>
       <Menu.Item
         danger

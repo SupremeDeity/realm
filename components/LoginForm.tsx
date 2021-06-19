@@ -3,6 +3,7 @@ import { Checkbox, Divider, Form, Input, Button, Typography } from "antd";
 import { MailOutlined, LockOutlined, GoogleOutlined } from "@ant-design/icons";
 import styles from "@styles/LoginForm.module.scss";
 import Header from "@components/header";
+import Link from "next/link";
 
 const { Text } = Typography;
 
@@ -55,10 +56,9 @@ const LoginForm = (props: ILoginFormProps) => {
                 Remember me
               </Checkbox>
             </Form.Item>
-
-            <a className={styles.login_form_forgot} href="../forgotpassword">
-              Forgot password
-            </a>
+            <Link href="./forgotpassword">
+              <a className={styles.login_form_forgot}>Forgot password</a>
+            </Link>
           </Form.Item>
           <Form.Item>
             <Button
@@ -71,7 +71,10 @@ const LoginForm = (props: ILoginFormProps) => {
             </Button>
           </Form.Item>
           <Form.Item style={{ color: "var(--tc-white)" }}>
-            Don't have an account? <a href="/register">Register now</a>
+            Don&apos;t have an account?{" "}
+            <Link href="/register">
+              <a>Register now</a>
+            </Link>
           </Form.Item>
           <Form.Item>
             <Divider className={styles.divider}>Or using Google</Divider>

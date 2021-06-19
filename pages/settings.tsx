@@ -8,6 +8,8 @@ import { isSameUser, PrototypeUser } from "@components/GlobalUserContext";
 import Header from "@components/header";
 import SettingsComponent from "@components/SettingsComponent";
 import initializeFirebase from "@services/firebase";
+import Resizer from "react-image-file-resizer";
+import Head from "next/head";
 
 const Settings = () => {
   const [isChecking, setIsChecking] = useState(true);
@@ -53,7 +55,7 @@ const Settings = () => {
   }, []);
 
   const onSave = (props) => {
-    console.log(props);
+    //console.log(props);
     setMsg("");
     let completedCounter = 0;
     let totalCounter = 0;
@@ -85,67 +87,85 @@ const Settings = () => {
           initializeFirebase();
           let storageRef = firebase.storage().ref();
           let imageRef = storageRef.child("profilePics/" + user.id);
-          let imageUploadTask = imageRef.put(props.image[0]);
 
-          imageUploadTask.on(
-            "state_changed",
-            (snapshot) => {
-              var progress =
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              message.info(
-                {
-                  content: "Uploading avatar: " + progress.toFixed(2) + "%",
-                  key: "avatarUpload",
-                },
-                5
-              );
-            },
-            (error) => {
-              // Handle unsuccessful uploads
-              message.error("Avatar upload unsuccessful!");
-            },
-            () => {
-              imageUploadTask.snapshot.ref
-                .getDownloadURL()
-                .then((downloadURL) => {
-                  firebase
-                    .auth()
-                    .currentUser.updateProfile({ photoURL: downloadURL })
-                    .then(() => {
-                      completedCounter++;
+          try {
+            Resizer.imageFileResizer(
+              props.image[0],
+              300,
+              300,
+              "JPEG",
+              100,
+              0,
+              (uri: File) => {
+                let imageUploadTask = imageRef.put(uri);
 
-                      if (completedCounter < totalCounter) {
-                        message.info(
-                          {
-                            content:
-                              "Saving (" +
-                              completedCounter +
-                              "/" +
-                              totalCounter +
-                              ")..",
-                            key: "save",
-                          },
-                          5
-                        );
-                      } else {
-                        message.success(
-                          {
-                            content:
-                              "Saved (" +
-                              completedCounter +
-                              "/" +
-                              totalCounter +
-                              ")..",
-                            key: "save",
-                          },
-                          5
-                        );
-                        router.reload();
-                      }
-                    });
-                });
-            }
-          );
+                imageUploadTask.on(
+                  "state_changed",
+                  (snapshot) => {
+                    var progress =
+                      (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    message.info(
+                      {
+                        content:
+                          "Uploading avatar: " + progress.toFixed(2) + "%",
+                        key: "avatarUpload",
+                      },
+                      5
+                    );
+                  },
+                  (error) => {
+                    // Handle unsuccessful uploads
+                    message.error("Avatar upload unsuccessful!");
+                  },
+                  () => {
+                    imageUploadTask.snapshot.ref
+                      .getDownloadURL()
+                      .then((downloadURL) => {
+                        firebase
+                          .auth()
+                          .currentUser.updateProfile({ photoURL: downloadURL })
+                          .then(() => {
+                            completedCounter++;
+
+                            if (completedCounter < totalCounter) {
+                              message.info(
+                                {
+                                  content:
+                                    "Saving (" +
+                                    completedCounter +
+                                    "/" +
+                                    totalCounter +
+                                    ")..",
+                                  key: "save",
+                                },
+                                5
+                              );
+                            } else {
+                              message.success(
+                                {
+                                  content:
+                                    "Saved (" +
+                                    completedCounter +
+                                    "/" +
+                                    totalCounter +
+                                    ")..",
+                                  key: "save",
+                                },
+                                5
+                              );
+                              router.reload();
+                            }
+                          });
+                      });
+                  }
+                );
+              },
+              "file"
+            );
+          } catch (err) {
+            // Handle unsuccessful uploads
+            message.error("Avatar upload unsuccessful!");
+          }
         }
 
         if (props.newName) {
@@ -219,20 +239,26 @@ const Settings = () => {
       .catch((error) => {
         if (error.code === "auth/wrong-password") {
           setMsg("Invalid password!");
-          console.log("Invalid Password");
+          //console.log("Invalid Password");
         }
-        console.log(error);
+        //console.log(error);
         message.error("Save failed!");
       });
   };
 
   return !isChecking ? (
     <div>
+      <Head>
+        <title>Realm - Settings</title>
+      </Head>
       <Header active="NONE" />
       <SettingsComponent user={user} onSave={onSave} message={msg} />
     </div>
   ) : (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+      <Head>
+        <title>Realm - Settings</title>
+      </Head>
       <Spin indicator={<LoadingOutlined />} size="large" />
     </div>
   );

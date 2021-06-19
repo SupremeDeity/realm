@@ -2,6 +2,9 @@ import firebase from "firebase/app";
 import "firebase/analytics";
 import "firebase/auth";
 
+import 'firebase/app-check';
+
+
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -15,6 +18,10 @@ const firebaseConfig = {
 const initializeFirebase = () => {
     if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
+ 
+    const appCheck = firebase.appCheck();
+    appCheck.activate(process.env.NEXT_PUBLIC_CAPTCHA_PUBLIC);
+   // console.info(self.FIREBASE_APPCHECK_DEBUG_TOKEN);
     }
 }
 

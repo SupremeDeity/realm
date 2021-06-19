@@ -5,6 +5,7 @@ import LoginForm from "@components/LoginForm";
 import { message as Message, Spin } from "antd";
 import initializeFirebase from "@services/firebase";
 import { LoadingOutlined } from "@ant-design/icons";
+import Head from "next/head";
 
 const Login = () => {
   const router = useRouter();
@@ -125,6 +126,9 @@ const Login = () => {
 
   return !isChecking ? (
     <div>
+      <Head>
+        <title>Realm - Login</title>
+      </Head>
       <LoginForm
         providerCallback={doProviderAuth}
         emailPassCallback={doEmailPassAuth}
@@ -134,6 +138,9 @@ const Login = () => {
     </div>
   ) : (
     <div className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+      <Head>
+        <title>Realm - Login</title>
+      </Head>
       <Spin indicator={<LoadingOutlined />} size="large" />
     </div>
   );

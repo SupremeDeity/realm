@@ -8,6 +8,7 @@ import styles from "@styles/PasswordComponent.module.scss";
 
 interface PasswordComponentProps {
   required: boolean;
+  autoComplete: string;
 }
 
 const PasswordComponent = (props: PasswordComponentProps) => {
@@ -48,7 +49,7 @@ const PasswordComponent = (props: PasswordComponentProps) => {
       return (
         <label
           style={{
-            color: "#dc3545",
+            color: "var(--bs-danger)",
             fontWeight: "bold",
             userSelect: "none",
           }}
@@ -87,6 +88,7 @@ const PasswordComponent = (props: PasswordComponentProps) => {
           prefix={<LockOutlined />}
           placeholder="Password"
           onChange={validatePassword}
+          autoComplete={props.autoComplete}
         ></Input>
       </Form.Item>
       <Progress

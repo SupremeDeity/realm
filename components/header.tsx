@@ -6,6 +6,7 @@ import { isSameUser, PrototypeUser } from "@components/GlobalUserContext";
 import firebase from "firebase/app";
 import initializeFirebase from "@services/firebase";
 import { Skeleton } from "antd";
+import Link from "next/link";
 
 let NavLinks = ["Home", "Docs", "API", "Pricing"];
 let routes = { Home: "/", Docs: "#", API: "#", Pricing: "#" };
@@ -25,13 +26,16 @@ const Header = (props: HeaderProps) => {
     return NavLinks.map((value) => {
       return (
         <li key={value} className="nav-item me-2">
-          <a
-            className={"nav-link" + (active == value ? " fw-bold active" : "")}
-            aria-current="page"
-            href={routes[value]}
-          >
-            {value}
-          </a>
+          <Link href={routes[value]}>
+            <a
+              className={
+                "nav-link" + (active == value ? " fw-bold active" : "")
+              }
+              aria-current="page"
+            >
+              {value}
+            </a>
+          </Link>
         </li>
       );
     });
@@ -118,16 +122,18 @@ const Header = (props: HeaderProps) => {
         style={{ background: "var(--bs-gray-dark)" }}
       >
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
-            <Image
-              src="/favicon.ico"
-              width="24px"
-              height="24px"
-              className="img-thumbnail d-inline-block align-text-top"
-              alt="header icon"
-            ></Image>
-            <label className="mx-1">Realm</label>
-          </a>
+          <Link href="/">
+            <a className="navbar-brand">
+              <Image
+                src="/favicon.ico"
+                width="24px"
+                height="24px"
+                className="img-thumbnail d-inline-block align-text-top"
+                alt="header icon"
+              ></Image>
+              <label className="mx-1">Realm</label>
+            </a>
+          </Link>
           <div
             className="collapse navbar-collapse flex-row-reverse"
             id="navbarSupportedContent"

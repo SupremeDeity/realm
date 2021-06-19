@@ -28,7 +28,7 @@ const ResetPasswordComponent = (props: IResetPasswordProps) => {
             {props.email}
           </Text>
         </Form.Item>
-        <PasswordComponent required={true} />
+        <PasswordComponent required={true} autoComplete="new-password" />
         {props.message ? (
           <Form.Item>
             <Text type="success">{props.message}</Text>
