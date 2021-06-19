@@ -34,7 +34,7 @@ const UnauthorizedError: PageError = {
   title: "Invalid or expired token code",
 };
 
-const test = () => {
+const ResetPassword = () => {
   const router = useRouter();
   const { mode, oobCode } = router.query;
   const [isChanging, setIsChanging] = useState(false);
@@ -94,4 +94,4 @@ const test = () => {
   );
 };
 
-export default test;
+export default ResetPassword;
